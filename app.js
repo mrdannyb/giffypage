@@ -31,17 +31,17 @@ $(document).ready(function () {
 			method : "GET"
 		}).done(function(response){
 			var results = response.data;
-			console.log(results);
 			for (i = 0; i < results.length; i++) {
 				var gifDiv = $("<div>");
+				gifDiv.attr("class", "col-sm-6");
 				var p = $("<p>").text("Rating: " + results[i].rating);
 				gifDiv.append(p);
 				var gifImg = $("<img>");
 				gifImg.attr("class", "giphy");
-				gifImg.attr("src", results[i].images.fixed_width_still.url);
+				gifImg.attr("src", results[i].images.fixed_height_still.url);
 				gifImg.attr("data-state", "still");
-				gifImg.attr("data-animate", results[i].images.fixed_width.url);
-				gifImg.attr("data-still", results[i].images.fixed_width_still.url);
+				gifImg.attr("data-animate", results[i].images.fixed_height.url);
+				gifImg.attr("data-still", results[i].images.fixed_height_still.url);
 				gifDiv.prepend(gifImg);
 				$("#giffy-view").prepend(gifDiv);
 			}
@@ -49,7 +49,6 @@ $(document).ready(function () {
 	})
 
 	$(document).on("click", ".giphy", function(){
-		console.log($(this).data("state"));
 		if ($(this).attr("data-state") == "still") {
 			$(this).attr("src", $(this).data("animate"));
 			$(this).attr("data-state", "animate")
